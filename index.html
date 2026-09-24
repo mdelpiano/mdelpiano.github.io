@@ -1,0 +1,896 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manuel Del Piano</title>
+<meta name="description" content="Manuel Del Piano — theoretical physicist. Deformed black hole geometries, near-horizon regularity, quasi-normal spectra.">
+<meta name="author" content="Manuel Del Piano">
+<meta name="theme-color" content="#06060B">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Manuel Del Piano">
+<meta property="og:description" content="Theoretical physicist. Deformed black hole geometries, near-horizon regularity, quasi-normal spectra.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Fira+Mono:wght@400;500&display=swap">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2306060B'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23C09818' stroke-width='1.6'/%3E%3Ccircle cx='16' cy='16' r='4.6' fill='%2306060B'/%3E%3Ccircle cx='16' cy='16' r='11.6' fill='none' stroke='%237836A7' stroke-width='.9' opacity='.8'/%3E%3C/svg%3E">
+
+<style>
+/* ============================================================
+   Single visual world: the deep field, and a lens in it.
+   Every colour below is sampled from the BIFROST render.
+   ============================================================ */
+
+:root {
+  color-scheme: dark;
+
+  --void:      #06060B;
+  --void-2:    #0D0E15;
+  --surface:   #12131C;
+  --ink:       #EDEBE6;
+  --ink-2:     #A6A4AE;
+  --ink-3:     #6E6C7A;
+  --rule:      #1E1F2A;
+  --rule-soft: #16171F;
+
+  /* sampled from the render */
+  --ring:      #C09818;
+  --ring-hi:   #E0B93E;
+  --ring-wash: #1A1508;
+  --violet:    #7836A7;
+  --azure:     #4375BF;
+  --lime:      #B0C921;
+  --ember:     #AA5A10;
+
+  --serif: "Spectral", Georgia, "Times New Roman", serif;
+  --mono:  "Fira Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --measure: 34rem;
+
+  /* width of the profile photo; its height follows the photo's own proportions */
+  --photo-w: 15rem;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; background: var(--void); }
+
+body {
+  margin: 0;
+  padding: 0 0 5rem;
+  background: var(--void);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; }
+
+a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--ring);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+a:hover { color: var(--ring-hi); }
+a:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; border-radius: 2px; }
+
+.wrap { max-width: 46rem; margin: 0 auto; padding-inline: 1.5rem; }
+
+/* ---------- hero ---------- */
+
+.hero {
+  position: relative;
+  min-height: 30rem;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  border-bottom: 1px solid var(--rule);
+}
+
+#lens {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to right, rgba(6,6,11,.92) 0%, rgba(6,6,11,.62) 34%, rgba(6,6,11,0) 62%),
+    linear-gradient(to bottom, rgba(6,6,11,.55) 0%, rgba(6,6,11,0) 30%, rgba(6,6,11,.30) 72%, rgba(6,6,11,.80) 100%);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 2.2rem;
+  display: grid;
+  grid-template-columns: var(--photo-w) 1fr;
+  gap: 1.8rem;
+  align-items: end;
+}
+
+.portrait, .portrait-fallback {
+  width: auto;
+  height: auto;                 /* keep the photo's own aspect ratio, no cropping */
+  border-radius: 1px;
+  display: block;
+  border: 0px solid var(--rule);
+  background: var(--void);
+}
+.portrait-fallback { aspect-ratio: 4 / 5; }
+
+.portrait-fallback {
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 1.35rem;
+  color: var(--ink-3);
+  letter-spacing: .08em;
+}
+
+h1 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(2.1rem, 7vw, 3.1rem);
+  line-height: 1.02;
+  letter-spacing: -.018em;
+  margin: 0 0 .4rem;
+  text-wrap: balance;
+  text-shadow: 0 2px 30px rgba(6,6,11,.9);
+}
+
+.pronounce {
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .07em;
+  color: var(--ink-3);
+  margin: 0 0 .9rem;
+}
+
+.role {
+  font-size: 1rem;
+  color: var(--ink-2);
+  margin: 0 0 1.2rem;
+  max-width: 30rem;
+}
+.role em { font-style: italic; color: var(--ink); }
+
+.links {
+  display: flex; flex-wrap: wrap; gap: .4rem 1.1rem;
+  font-family: var(--mono); font-size: .78rem;
+  margin: 0; padding: 0; list-style: none;
+}
+
+/* the one full-spectrum gesture on the page */
+.spectral-rule {
+  height: 2.5px;
+  border: 0;
+  margin: 0;
+  background: linear-gradient(90deg,
+    #1F0806 0%, var(--ember) 14%, var(--ring) 28%,
+    var(--lime) 42%, #417867 54%, var(--azure) 68%,
+    var(--violet) 84%, #2A0F3C 100%);
+  opacity: .85;
+}
+
+/* ---------- nav ---------- */
+
+nav.jump {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(6,6,11,.93);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+}
+
+.nav-inner {
+  max-width: 46rem; margin: 0 auto;
+  padding: .8rem 1.5rem;
+  display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; align-items: baseline;
+  font-family: var(--mono); font-size: .76rem; letter-spacing: .04em;
+}
+nav.jump a {
+  text-decoration: none; color: var(--ink-2);
+  padding: .15rem 0; border-bottom: 1px solid transparent;
+}
+nav.jump a:hover { color: var(--ring-hi); }
+nav.jump a[aria-selected="true"] { color: var(--ring); border-bottom-color: var(--ring); }
+
+/* tabbed view: only the selected section is shown (without JS, all are) */
+.tabbed section[hidden] { display: none; }
+.tabbed section { animation: fade-in .25s ease-out; }
+@keyframes fade-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+/* ---------- sections ---------- */
+
+section { padding-top: 3.4rem; }
+
+.label {
+  font-family: var(--mono);
+  font-size: .7rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--ring); margin: 0 0 1.1rem;
+}
+
+h2 {
+  font-family: var(--serif); font-weight: 500; font-size: 1.5rem;
+  letter-spacing: -.012em; margin: 0 0 1rem; line-height: 1.2;
+}
+
+p { max-width: var(--measure); margin: 0 0 1.05rem; }
+section > p:last-of-type { margin-bottom: 0; }
+.lede { font-size: 1.08rem; }
+
+/* ---------- figures ---------- */
+
+figure { margin: 2rem 0 0; }
+
+.fig-spectrum {
+  display: flex; align-items: center; gap: 1.6rem; flex-wrap: wrap;
+  padding: 1.4rem 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.fig-spectrum svg { flex: 0 0 auto; }
+
+figcaption {
+  font-family: var(--serif); font-size: .88rem; line-height: 1.55;
+  color: var(--ink-2); max-width: 22rem; margin: 0;
+}
+figcaption b {
+  font-family: var(--mono); font-size: .72rem; font-weight: 500;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--ring);
+  display: block; margin-bottom: .35rem;
+}
+
+.fig-render { max-width: var(--measure); }
+.fig-render img {
+  width: 100%; display: block; border: 1px solid var(--rule);
+  background: var(--void-2);
+}
+.fig-render figcaption { max-width: none; margin-top: .7rem; }
+
+/* ---------- publications ---------- */
+
+.pubs { display: flex; flex-direction: column; gap: 1.5rem; margin-top: .4rem; }
+.pub { max-width: var(--measure); }
+.pub-n { font-family: var(--mono); font-size: .72rem; color: var(--ink-3); float: left; width: 2.1rem; line-height: 1.75; }
+.pub-body { margin-left: 2.1rem; }
+.pub-title { display: block; font-size: 1rem; line-height: 1.4; margin-bottom: .18rem; text-wrap: pretty; }
+.pub-authors { display: block; font-size: .88rem; color: var(--ink-2); line-height: 1.5; margin-bottom: .3rem; }
+.pub-authors b { font-weight: 600; color: var(--ink); }
+.pub-meta { font-family: var(--mono); font-size: .74rem; color: var(--ink-3); display: flex; flex-wrap: wrap; gap: .2rem .7rem; }
+.pub-meta .journal { color: var(--ink-2); }
+.pub-meta .preprint { color: var(--ring); }
+.also { font-family: var(--mono); font-size: .76rem; color: var(--ink-3); margin-top: 1.7rem; max-width: var(--measure); }
+
+/* ---------- entry lists ---------- */
+
+.entries { list-style: none; margin: .3rem 0 0; padding: 0; display: flex; flex-direction: column; gap: .85rem; max-width: var(--measure); }
+.entries li { display: grid; grid-template-columns: 5.2rem 1fr; gap: .9rem; align-items: baseline; }
+.entries .when { font-family: var(--mono); font-size: .74rem; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.entries .what { font-size: .96rem; line-height: 1.45; }
+.entries .what small { display: block; font-size: .84rem; color: var(--ink-2); font-family: var(--serif); }
+.mark { font-family: var(--mono); font-size: .7rem; color: var(--ring); }
+.legend { font-family: var(--mono); font-size: .72rem; color: var(--ink-3); margin-top: 1.1rem; }
+
+/* ---------- facts ---------- */
+
+.facts { display: flex; flex-direction: column; gap: 1.1rem; max-width: var(--measure); margin-top: .3rem; }
+.fact h3 {
+  font-family: var(--mono); font-size: .72rem; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 .25rem;
+}
+.fact p { margin: 0; font-size: .96rem; }
+
+/* ---------- footer ---------- */
+
+footer {
+  margin-top: 4rem; padding-top: 1.6rem; border-top: 1px solid var(--rule);
+  font-family: var(--mono); font-size: .74rem; line-height: 1.85;
+  color: var(--ink-3); max-width: var(--measure);
+}
+footer p { max-width: none; margin: 0 0 .9rem; }
+footer a { color: var(--ink-2); }
+
+/* ---------- narrow ---------- */
+
+@media (max-width: 40rem) {
+  .wrap { padding-inline: 1.1rem; }
+  .nav-inner { padding-inline: 1.1rem; }
+  .hero { min-height: 22rem; }
+  .hero-inner { grid-template-columns: 1fr; gap: 1.2rem; padding: 2.4rem 1.1rem 1.8rem; }
+  :root { --photo-w: 7rem; }
+  .entries li { grid-template-columns: 1fr; gap: .1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <canvas id="lens" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <div>
+      <img class="portrait" src="files/photo.png" alt="Manuel Del Piano"
+           onerror="this.outerHTML='&lt;div class=\'portrait-fallback\'&gt;MDP&lt;/div&gt;'">
+    </div>
+    <div>
+      <h1>Manuel Del Piano</h1>
+      <p class="pronounce">you can call me Manuél</p>
+      <p class="role">Postdoctoral researcher at the <em>Quantum Field Theory Center</em>, University of Southern Denmark, Odense.</p>
+      <ul class="links">
+        <li><a href="mailto:madelp@qtc.sdu.dk">email</a></li>
+        <li><a href="https://inspirehep.net/authors/2058247?ui-citation-summary=true" target="_blank" rel="noopener">INSPIRE</a></li>
+        <li><a href="https://orcid.org/0000-0003-4515-8787" target="_blank" rel="noopener">ORCID</a></li>
+        <li><a href="https://arxiv.org/a/delpiano_m_1" target="_blank" rel="noopener">arXiv</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<hr class="spectral-rule">
+
+<!-- ============ NAV ============ -->
+<nav class="jump" aria-label="Sections">
+  <div class="nav-inner" role="tablist">
+    <a href="#research" role="tab" aria-controls="research">research</a>
+    <a href="#publications" role="tab" aria-controls="publications">publications</a>
+    <a href="#talks" role="tab" aria-controls="talks">talks</a>
+    <a href="#cv" role="tab" aria-controls="cv">CV</a>
+    <a href="#elsewhere" role="tab" aria-controls="elsewhere">elsewhere</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- ============ RESEARCH (default tab) ============ -->
+  <section id="research" role="tabpanel">
+    <p class="label" style="margin-top:2.6rem">Black holes</p>
+
+    <p class="lede">Black holes are where gravity is at its most extreme. The event horizon is a one-way membrane, and whatever happens inside it is hidden from us. The region around it is not: light and gravitational waves cross it on their way to our telescopes and detectors, and carry an imprint of the geometry there.</p>
+    <p class="lede">Almost everything we say about an astrophysical black hole begins by assuming it is the Kerr solution of vacuum general relativity. We assume it because it is the solution we know how to compute with, not because it has been tested where it would matter most, in the strong field just outside the horizon.</p>
+    <p class="lede">I build descriptions that do not assume it, and carry them far enough out to be compared with a measurement.</p>
+
+    <h2>Deformed geometries, and what they predict</h2>
+
+    <p>A recurring idea in the search for quantum gravity is that new physics must appear at or near the Planck scale. String theory, loop quantum gravity and asymptotic safety are among the approaches built on it. Many of them, together with a range of phenomenological models, predict black hole geometries that deviate from the classical solutions in ways that reflect the underlying quantum structure.</p>
+
+    <p>One place such deviations would show is the light ring, the unstable circular orbit of photons around the hole. For a given mass, general relativity fixes where it sits, and it sets the edge of the shadow seen in images such as those of the Event Horizon Telescope. A deformed geometry moves the light ring and reshapes the shadow, but reading the geometry back from an image is far from straightforward.</p>
+
+    <p>Gravitational waves offer a complementary, and in some respects cleaner, probe. The ringdown of a newly formed black hole returns a short list of complex frequencies. Turning that list into a statement about whether the remnant was Kerr requires a map, from <em>the geometry is deformed, by some unknown physics</em> to <em>the frequencies move, by this much</em>, and the map has to be built without committing in advance to which theory did the deforming.</p>
+
+    <p>The difficulty is that a theory-agnostic parametrisation is easy to write down and hard to make mean anything. Write a general deformation of the metric, expand, fit the coefficients, quote bounds: the procedure is standard and much of its output is not well defined, because a large part of the parameter space being fitted corresponds to no consistent spacetime at all.</p>
+
+    <p>With Francesco Sannino, Stefan Hohenegger and others I co-developed the <strong>Effective Metric Description</strong>, which is an attempt to put that on a proper footing. A deformation away from Schwarzschild or Reissner–Nordström is expanded not in a coordinate but in a physical quantity, such as the proper radial distance to the horizon or a curvature invariant like the Ricci or Kretschmann scalar, so that the coefficients describe the geometry itself rather than the chart or the model used to write it down.</p>
+
+    <figure class="fig-spectrum">
+      <svg width="215" height="180" viewBox="0 0 215 150" role="img" style="overflow:visible"
+           aria-label="The first five quasi-normal overtones of a Schwarzschild black hole, plotted in the complex frequency plane. The modes descend and drift left as the overtone number increases.">
+        <line x1="34" y1="18" x2="34" y2="126" stroke="#1E1F2A" stroke-width="1"/>
+        <line x1="34" y1="18" x2="200" y2="18" stroke="#1E1F2A" stroke-width="1"/>
+        <line x1="70"  y1="18" x2="70"  y2="22" stroke="#1E1F2A" stroke-width="1"/>
+        <line x1="182" y1="18" x2="182" y2="22" stroke="#1E1F2A" stroke-width="1"/>
+        <text x="70"  y="13" fill="#6E6C7A" font-family="Fira Mono, monospace" font-size="7.5" text-anchor="middle">0.20</text>
+        <text x="182" y="13" fill="#6E6C7A" font-family="Fira Mono, monospace" font-size="7.5" text-anchor="middle">0.40</text>
+        <line x1="30" y1="38"  x2="34" y2="38"  stroke="#1E1F2A" stroke-width="1"/>
+        <line x1="30" y1="122" x2="34" y2="122" stroke="#1E1F2A" stroke-width="1"/>
+        <text x="27" y="41"  fill="#6E6C7A" font-family="Fira Mono, monospace" font-size="7.5" text-anchor="end">−0.2</text>
+        <text x="27" y="125" fill="#6E6C7A" font-family="Fira Mono, monospace" font-size="7.5" text-anchor="end">−1.0</text>
+        <circle cx="167.3" cy="26.4"  r="4.2" fill="#C09818"/>
+        <circle cx="152.2" cy="45.8"  r="3.7" fill="#C09818" opacity=".82"/>
+        <circle cx="126.6" cy="67.2"  r="3.2" fill="#C09818" opacity=".64"/>
+        <circle cx="98.8"  cy="91.0"  r="2.8" fill="#C09818" opacity=".48"/>
+        <circle cx="74.2"  cy="116.4" r="2.4" fill="#C09818" opacity=".34"/>
+        <text x="100" y="1" fill="#6E6C7A" font-family="Fira Mono, monospace" font-size="8">Re Mω</text>
+        <text x="14" y="72" fill="#6E6C7A" font-family="Fira Mono, monospace" font-size="8" transform="rotate(-90 14 72)" text-anchor="middle">Im Mω</text>
+      </svg>
+      <figcaption>
+        <b>The ringdown, as a spectrum</b>
+        The first five quasi-normal ℓ = 2 overtones of a Schwarzschild black hole in the complex frequency plane. Each point is one damped tone: how fast it rings to the right, how fast it dies downward. Where these points move when the geometry is deformed is one of the questions the framework is built to answer.
+      </figcaption>
+    </figure>
+
+    <p style="margin-top:2rem">The technical content of the framework is a regularity problem, and that is the part I find most worth having. Requiring a deformed geometry to admit a self-consistent near-horizon expansion free of curvature singularities imposes real conditions on the deformation, and several quantum-corrected metrics in active circulation violate them. The framework is constraining rather than descriptive: it removes candidate geometries from circulation. And because the same construction reaches outward (through Padé resummation) to shadows, photon-sphere data and quasi-normal spectra, a geometry that fails a consistency condition does not fail abstractly. It predicts a number an observation can confront.</p>
+
+    <p>More recently I have been moving the programme out of the static case. With Marco de Cesare and Carlos Herdeiro I solved the Einstein equations to quadratic order for the backreaction of a decaying massive scalar cloud on a Schwarzschild black hole, keeping the exponential decay of the state rather than treating the cloud as stationary, so that the horizon evolves under the field equations rather than by assumption.</p>
+
+    <p>The next questions I want to answer are whether the near-horizon consistency conditions have anything to say about the <em>stability</em> of the quasi-normal spectrum, and what all of this looks like once the geometry is allowed to rotate.</p>
+    
+    <p class="label" style="margin-top:2.6rem">Quantum field theory</p>
+    <h2>Beyond black holes</h2>
+
+    <p>Not everything I work on has a horizon in it. With Borut Bajc and Francesco Sannino I studied a grand unified theory that stays finite in the ultraviolet once supersymmetry is broken, asking how far the good high-energy behaviour of a supersymmetric theory can survive the breaking that any realistic model needs.</p>
+
+    <p>More recently I have been working on semiclassical methods for strongly coupled gauge theories. The idea is that the scaling dimension of an operator built from many fields, such as a high power of the Yang–Mills field strength, can be computed from a classical solution on the cylinder ℝ × S³ and its quantisation, in a regime where ordinary perturbation theory is of little use. Extending this approach to pure Yang–Mills is work in progress, and it is a useful change of perspective: the same questions of consistency and control that matter near a horizon turn up here in a very different form.</p>  
+</section>
+
+  <!-- ============ PUBLICATIONS ============ -->
+  <section id="publications" role="tabpanel">
+    <p class="label">Publications</p>
+    <h2>From the most recent to the oldest</h2>
+
+    <div class="pubs">
+
+      <div class="pub"><span class="pub-n">[10]</span><div class="pub-body">
+        <span class="pub-title"><a href="https://arxiv.org/abs/2607.25932" target="_blank" rel="noopener">Analytic backreaction of a scalar wig on a Schwarzschild black hole</a></span>
+        <span class="pub-authors">M. de Cesare, <b>M. Del Piano</b>, C. A. R. Herdeiro</span>
+        <span class="pub-meta"><span class="preprint">preprint</span><span>arXiv:2607.25932</span></span>
+      </div></div>
+
+        <div class="pub"><span class="pub-n">[9]</span><div class="pub-body">
+        <span class="pub-title"><a href="https://arxiv.org/abs/2606.24642" target="_blank" rel="noopener">When black holes admit pair-of-pants topologies</a></span>
+        <span class="pub-authors">G. Cacciapaglia, <b>M. Del Piano</b>, F. Sannino, V. Vellucci</span>
+        <span class="pub-meta"><span class="preprint">preprint</span><span>arXiv:2606.24642</span></span>
+      </div></div>
+
+      <div class="pub"><span class="pub-n">[8]</span><div class="pub-body">
+        <span class="pub-title"><a href="https://arxiv.org/abs/2510.14707" target="_blank" rel="noopener">Toward a unified view of agnostic parametrizations for deformed black holes</a></span>
+        <span class="pub-authors"><b>M. Del Piano</b>, C. De Simone, M. Damia Paciarini, V. De Falco, M. Myszkowski, F. Sannino, V. Vellucci</span>
+        <span class="pub-meta"><span class="journal">Phys. Rev. D 113 (2026) 064010</span><span>arXiv:2510.14707</span></span>
+      </div></div>
+
+      <div class="pub"><span class="pub-n">[7]</span><div class="pub-body">
+        <span class="pub-title"><a href="https://arxiv.org/abs/2504.01539" target="_blank" rel="noopener">Black hole solutions in quantum phenomenological gravitational dynamics</a></span>
+        <span class="pub-authors">A. Alonso-Serrano, M. de Cesare, <b>M. Del Piano</b></span>
+        <span class="pub-meta"><span class="journal">Phys. Rev. D 112 (2025) 084031</span><span>arXiv:2504.01539</span></span>
+      </div></div>
+
+      <div class="pub"><span class="pub-n">[6]</span><div class="pub-body">
+        <span class="pub-title"><a href="https://arxiv.org/abs/2504.20810" target="_blank" rel="noopener">Effective metric description of charged black holes</a></span>
+        <span class="pub-authors">M. Damia Paciarini, <b>M. Del Piano</b>, S. Hohenegger, F. Sannino</span>
+        <span class="pub-meta"><span class="journal">Eur. Phys. J. C 85 (2025) 848</span><span>arXiv:2504.20810</span></span>
+      </div></div>
+
+      <div class="pub"><span class="pub-n">[5]</span><div class="pub-body">
+        <span class="pub-title"><a href="https://arxiv.org/abs/2412.13673" target="_blank" rel="noopener">Black hole shadow and other observables away from the horizon: extending the effective metric descriptions</a></span>
+        <span class="pub-authors"><b>M. Del Piano</b>, S. Hohenegger, F. Sannino</span>
+        <span class="pub-meta"><span class="journal">Phys. Rev. D 111 (2025) 064070</span><span>arXiv:2412.13673</span></span>
+      </div></div>
+
+      <div class="pub"><span class="pub-n">[4]</span><div class="pub-body">
+        <span class="pub-title"><a href="https://arxiv.org/abs/2403.12679" target="_blank" rel="noopener">Effective metric descriptions of quantum black holes</a></span>
+        <span class="pub-authors"><b>M. Del Piano</b>, S. Hohenegger, F. Sannino</span>
+        <span class="pub-meta"><span class="journal">Eur. Phys. J. C 84 (2024) 1273</span><span>arXiv:2403.12679</span></span>
+      </div></div>
+
+      <div class="pub"><span class="pub-n">[3]</span><div class="pub-body">
+        <span class="pub-title"><a href="https://arxiv.org/abs/2308.13311" target="_blank" rel="noopener">UV finite GUT with SUSY breaking</a></span>
+        <span class="pub-authors">B. Bajc, <b>M. Del Piano</b>, F. Sannino</span>
+        <span class="pub-meta"><span class="journal">Phys. Rev. D 109 (2024) 055043</span><span>arXiv:2308.13311</span></span>
+      </div></div>
+
+      <div class="pub"><span class="pub-n">[2]</span><div class="pub-body">
+        <span class="pub-title"><a href="https://arxiv.org/abs/2307.13489" target="_blank" rel="noopener">Quantum black hole physics from the event horizon</a></span>
+        <span class="pub-authors"><b>M. Del Piano</b>, S. Hohenegger, F. Sannino</span>
+        <span class="pub-meta"><span class="journal">Phys. Rev. D 109 (2024) 024045</span><span>arXiv:2307.13489</span></span>
+      </div></div>
+
+      <div class="pub"><span class="pub-n">[1]</span><div class="pub-body">
+        <span class="pub-title"><a href="https://arxiv.org/abs/2203.13515" target="_blank" rel="noopener">The effective theory of quantum black holes</a></span>
+        <span class="pub-authors">E. Binetti, <b>M. Del Piano</b>, S. Hohenegger, F. Pezzella, F. Sannino</span>
+        <span class="pub-meta"><span class="journal">Phys. Rev. D 106 (2022) 046006</span><span>arXiv:2203.13515</span></span>
+      </div></div>
+
+    </div>
+
+    <p class="also">Also on <a href="https://inspirehep.net/authors/2058247?ui-citation-summary=true" target="_blank" rel="noopener">INSPIRE</a> · <a href="https://orcid.org/0000-0003-4515-8787" target="_blank" rel="noopener">ORCID</a> · <a href="https://arxiv.org/a/delpiano_m_1" target="_blank" rel="noopener">arXiv</a></p>
+  </section>
+
+  <!-- ============ TALKS ============ -->
+  <section id="talks" role="tabpanel">
+    <p class="label">Talks and seminars</p>
+    <h2>Where this has been argued about</h2>
+
+    <ul class="entries">
+      <li><span class="when">2026.08</span><span class="what">Black Holes to the Cosmos: Matt Visser's journey thorugh space and time <small>SISSA, Trieste, Italy — poster</small></span></li>
+      <li><span class="when">2026.03</span><span class="what"><span class="mark">◇</span> PAFT 2026 — Particles and Fields Theory <small>Vietri sul Mare, Italy</small></span></li>
+      <li><span class="when">2026.02</span><span class="what"><span class="mark">◆</span> CEICO Cosmology Seminar <small>Czech Academy of Sciences, Prague</small></span></li>
+      <li><span class="when">2025.05</span><span class="what"><span class="mark">◆</span> Quantum and Classical Gravity Group <small>Humboldt University, Berlin — host: A. Alonso-Serrano</small></span></li>
+      <li><span class="when">2025.03</span><span class="what"><span class="mark">◆</span> Strong Group Meeting <small>Niels Bohr Institute, Copenhagen — host: V. Cardoso</small></span></li>
+      <li><span class="when">2024.10</span><span class="what"><span class="mark">◆</span> Institute of Cosmos Sciences <small>University of Barcelona — host: R. Emparan</small></span></li>
+      <li><span class="when">2025.09</span><span class="what"><span class="mark">◇</span> XXVI SIGRAV Conference on General Relativity and Gravitation <small>Milan</small></span></li>
+      <li><span class="when">2025.09</span><span class="what"><span class="mark">◇</span> Astrophysics and Space Science in Marche II <small>Camerino, Italy</small></span></li>
+      <li><span class="when">2025.08</span><span class="what">Quantum Phases of Strong Dynamics <small>Odense, Denmark</small></span></li>
+      <li><span class="when">2025.06</span><span class="what"><span class="mark">◇</span> Mathematical Physics of Gravity and Symmetry <small>ENS de Lyon</small></span></li>
+      <li><span class="when">2024.09</span><span class="what">Theories of Fundamental Interactions — TFI 2024 <small>Naples — poster</small></span></li>
+      <li><span class="when">2024.03</span><span class="what"><span class="mark">◇</span> PAFT 2024 — Particles and Fields Theory <small>Vietri sul Mare, Italy</small></span></li>
+      <li><span class="when">2023.06</span><span class="what"><span class="mark">◇</span> NEHOP23 — New Horizons on Primordial Black Holes <small>Naples</small></span></li>
+    </ul>
+
+    <p class="legend">◆ invited seminar · ◇ contributed talk</p>
+  </section>
+
+  <!-- ============ ELSEWHERE ============ -->
+  <section id="elsewhere" role="tabpanel">
+    <p class="label">Elsewhere</p>
+    <h2>Beyond the papers</h2>
+
+    <div class="facts">
+      <div class="fact">
+        <h3>LISA Consortium</h3>
+        <p>Core member since 2026, in the Fundamental Physics and Waveform Working Groups — where deformed-spectrum work either becomes a constraint or does not.</p>
+      </div>
+      <div class="fact">
+        <h3>COST Action CA23130</h3>
+        <p>Member of BridgeQG — Bridging High and Low Energies in Search of Quantum Gravity — since 2024. Its remit is the traffic between formal and phenomenological gravity, which is roughly where I live.</p>
+      </div>
+      <div class="fact">
+        <h3>Refereeing</h3>
+        <p>Classical and Quantum Gravity, JCAP, European Physical Journal C, Annals of Physics, Physics of the Dark Universe, and the International Journal of Geometric Methods in Modern Physics.</p>
+      </div>
+      <div class="fact">
+        <h3>Organising</h3>
+        <p>Co-organiser of the <a href="https://event.sdu.dk/bifrost-blackholeinsightsnavigatingthefrontiersofspacetime" target="_blank" rel="noopener">BIFROST workshop</a> (<strong>B</strong>lack hole <strong>I</strong>nsights: <strong>N</strong>avigating the <strong>FRO</strong>ntiers of <strong>S</strong>pace<strong>T</strong>ime), Odense, 2025 — and the author of its poster, below.</p>
+      </div>
+      <div class="fact">
+        <h3>Teaching</h3>
+        <p>Private tutoring in mathematics and physics at secondary-school and undergraduate level since 2020.</p>
+      </div>
+    </div>
+
+    <figure class="fig-render">
+      <img src="files/bifrost.jpg" alt="A gravitationally lensed black hole against a deep field of galaxies, the accretion structure split into a chromatic ring, rendered in Blender for the BIFROST workshop poster.">
+      <figcaption>
+        <b>BIFROST, Odense 2025</b>
+        Rendered in Blender for the workshop poster. The bright inner circle is the photon ring; everything outside is the strong field of the hole, which is bending the light from accretion disk (colored as the <a href="https://norse-mythology.org/cosmology/bifrost/" target="_blank" rel="noopener">Bifröst</a>, the god's bridge in Norse mythology</a>) and from the background image taken from <a href="https://esahubble.org/images/heic0406a/" target="_blank" rel="noopener">NASA</a>. The moving field at the top of this page is the same picture computed live, with the deflection evaluated for each star rather than ray-traced.
+      </figcaption>
+    </figure>
+
+    <div class="fact">
+        <h3>Kitchen</h3>
+        <p>My Neapolitan origins do not lie: I make a very good pizza, a proper pasta al forno, and more desserts than is reasonable. You can ask my friends' feedback on my cooking! ;-P</p>
+      </div>
+
+      <div class="fact">
+        <h3>Ballroom</h3>
+        <p>I am part of the ballroom community and walk balls in Old Way and Executive Realness. Old Way is vogue at its most geometric, all lines, symmetry and precision, which may not be a coincidence. Ballroom was built by Black and Latinx LGBTQ+ communities in New York, and I am grateful to be welcomed into it.</p>
+      </div>
+  </section>
+
+  <!-- ============ CV ============ -->
+  <section id="cv" role="tabpanel">
+    <p class="label">Curriculum vitae</p>
+    <h2>Naples, then Odense</h2>
+
+    <ul class="entries">
+      <li><span class="when">2025 —</span><span class="what">Odense, Denmark <small>Postdoctoral researcher at the Quantum Field Theory Center, University of Southern Denmark, with Francesco Sannino.</small></span></li>
+      <li><span class="when">2021 — 25</span><span class="what">Naples, Italy <small>PhD at the Scuola Superiore Meridionale and INFN Napoli, awarded with honours in December 2025.</small></span></li>
+      <li><span class="when">2019 — 21</span><span class="what">Naples, Italy <small>MSc in Theoretical Physics at the Università degli Studi di Napoli Federico II, 110/110 cum laude. The master's thesis was on the swampland programme — <em>Charting Swampland with Black Hole Physics</em> — which is how I arrived at horizons from the string theory side.</small></span></li>
+      <li><span class="when">2016 — 19</span><span class="what">Naples, Italy <small>BSc in Physics at the Università degli Studi di Napoli Federico II, 110/110 cum laude. The bachelor's thesis was on experiments for testing Einstein's Equivalence Principle at atomic scales using space-based missions.</small></span></li>
+      <li><span class="when">2013 — 16</span><span class="what">Naples, Italy <small>High school studies at the Military School "Nunziatella", where I developed strong disciplinary skills and a passion for science.</small></span></li>
+    </ul>
+
+    <p class="also">Full CV as <a href="files/cv.pdf" target="_blank" rel="noopener">PDF</a> · talks and publications have their own tabs above.</p>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <p><strong>Get in touch.</strong> <a href="mailto:madelp@qtc.sdu.dk">madelp@qtc.sdu.dk</a> — I am always glad to hear from curious people and discuss physics. Students welcome.</p>
+
+    <p><strong>Colophon.</strong> Hand-written HTML, CSS and canvas; no framework, no build step. The type is <a href="https://fonts.google.com/specimen/Spectral" target="_blank" rel="noopener">Spectral</a> and <a href="https://fonts.google.com/specimen/Fira+Mono" target="_blank" rel="noopener">Fira Mono</a>. Every colour on the page is sampled from the BIFROST render (under <a href="#elsewhere">elsewhere</a>) — the gold of the ring, the violet and azure of the inner arcs, and the band under the masthead, which is the whole sequence in order.</p>
+
+    <p><strong>The field at the top</strong> is a point-lens calculation, not a decoration. It is inspired by my Blender rendering for the poster of the workshop BIFROST I organized in October 2025. Each star is a source behind the hole; the two images of it are placed at y± = ½(u ± √(u²+4)) in units of the Einstein radius, and brightened by μ± = ½(μ ± 1) with μ = (u²+2)/(u√(u²+4)). Stars passing near alignment are stretched onto the ring and flare, which is what lensing actually does. The plot under <a href="#research">research</a> is the quasi-normal spectrum of Schwarzschild, the first five overtones of the ℓ = 2 mode.</p>
+
+    <p>© 2026 Manuel Del Piano · <a href="https://inspirehep.net/authors/2058247?ui-citation-summary=true" target="_blank" rel="noopener">INSPIRE</a> · <a href="https://orcid.org/0000-0003-4515-8787" target="_blank" rel="noopener">ORCID</a></p>
+  </footer>
+
+</div>
+
+<script>
+/* ============================================================
+   Tabs. The nav shows one section at a time, chosen by the URL
+   hash (#research, #publications, #talks, #cv, #elsewhere), so
+   each tab has its own link and the back button works.
+   Without JavaScript every section is simply shown in sequence.
+   ============================================================ */
+(function () {
+  var tabs = [].slice.call(document.querySelectorAll('nav.jump a[role="tab"]'));
+  var ids = tabs.map(function (a) { return a.getAttribute('href').slice(1); });
+  var nav = document.querySelector('nav.jump');
+  document.documentElement.classList.add('tabbed');
+
+  function show(id, scroll) {
+    if (ids.indexOf(id) < 0) id = ids[0];
+    ids.forEach(function (x, i) {
+      var on = x === id;
+      document.getElementById(x).hidden = !on;
+      tabs[i].setAttribute('aria-selected', on ? 'true' : 'false');
+      tabs[i].tabIndex = on ? 0 : -1;
+    });
+    // if the reader has scrolled past the nav, bring the new tab's top into view
+    if (scroll && nav.getBoundingClientRect().top <= 0) {
+      window.scrollTo(0, nav.offsetTop);
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var id = a.getAttribute('href').slice(1);
+    if (ids.indexOf(id) < 0) return;
+    e.preventDefault();
+    if (location.hash !== '#' + id) history.pushState(null, '', '#' + id);
+    show(id, true);
+  });
+  window.addEventListener('popstate', function () { show(location.hash.slice(1), true); });
+
+  // arrow keys move between tabs
+  nav.addEventListener('keydown', function (e) {
+    var i = tabs.indexOf(document.activeElement);
+    if (i < 0 || (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft')) return;
+    var j = (i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length;
+    tabs[j].focus(); tabs[j].click();
+  });
+
+  show(location.hash.slice(1), false);
+})();
+
+/* ============================================================
+   Gravitational lensing of a starfield — point-lens optics.
+   For a source at angular separation u (units of the Einstein
+   radius) the two images sit at y± = ½(u ± √(u²+4)) and carry
+   magnifications μ± = ½(μ ± 1), μ = (u²+2)/(u√(u²+4)).
+   ============================================================ */
+(function () {
+  var cv = document.getElementById('lens');
+  if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext('2d', { alpha: false });
+
+  var reduced = window.matchMedia &&
+                window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var STAR_TINTS = [
+    [255, 252, 245], [214, 226, 255], [255, 236, 206],
+    [255, 208, 150], [190, 208, 255], [255, 246, 230]
+  ];
+
+  var stars = [], W = 0, H = 0, DPR = 1, thetaE = 0, cx = 0, cy = 0;
+  var running = false, t0 = 0, raf = 0;
+  var ringLayer = null;            // pre-rendered glowing rings, rebuilt on resize
+
+  function seedStars() {
+    var n = Math.round(Math.min(900, Math.max(300, (W * H) / 1250)));
+    stars = [];
+    for (var i = 0; i < n; i++) {
+      stars.push({
+        // source-plane position in units of thetaE, generous margin
+        sx: (Math.random() * 4.4 - 2.2),
+        sy: (Math.random() * 3.0 - 1.5),
+        m: 0.5 + Math.random() * 1.15,           // intrinsic size
+        tint: STAR_TINTS[(Math.random() * STAR_TINTS.length) | 0],
+        tw: Math.random() * 6.283                 // twinkle phase
+      });
+    }
+  }
+
+  function resize() {
+    var r = cv.getBoundingClientRect();
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = Math.max(1, Math.round(r.width));
+    H = Math.max(1, Math.round(r.height));
+    cv.width = Math.round(W * DPR);
+    cv.height = Math.round(H * DPR);
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    // keep the lens clear of the name: right of centre on wide screens
+    cx = W * (W > 680 ? 0.72 : 0.60);
+    cy = H * 0.37;
+    thetaE = Math.min(W, H) * 0.30;
+    seedStars();
+    buildRings();
+  }
+
+  /* The rings never move, so they are drawn once, with their glow,
+     into an off-screen canvas and then stamped onto every frame.
+     The blur is expensive; doing it here keeps the animation cheap. */
+  var RINGS = [
+    // radius (θE), colour (r,g,b), core alpha, line width, glow alpha
+    [1.045, [120, 54, 167], 0.46, 5.0, 0.40],   // violet
+    [1.020, [ 67,117, 191], 0.50, 4.5, 0.35],   // azure
+    [0.990, [192,152,  24], 0.80, 4.0, 0.45],   // gold
+    [0.962, [170, 90,  16], 0.46, 3.5, 0.35]    // ember
+  ];
+  var GLOW = 0.5;                // glow radius, in units of θE — raise for a softer, wider haze
+  var FUZZ = 1.6;                // how soft each ring is: the band is FUZZ × its line width across (≈1 = sharp)
+
+  function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')'; }
+
+  function buildRings() {
+    ringLayer = document.createElement('canvas');
+    ringLayer.width = cv.width;
+    ringLayer.height = cv.height;
+    var g = ringLayer.getContext('2d');
+    g.setTransform(DPR, 0, 0, DPR, 0, 0);
+    g.globalCompositeOperation = 'lighter';     // overlapping glows add up, like light
+
+    // 1. a faint halo: the whole colour sequence smeared radially, fading to nothing on both sides
+    var r0 = thetaE * 0.10, r1 = thetaE * 1.26;
+    var halo = g.createRadialGradient(cx, cy, r0, cx, cy, r1);
+    function at(r) { return Math.min(1, Math.max(0, (r * thetaE - r0) / (r1 - r0))); }
+    halo.addColorStop(0, 'rgba(0,0,0,0)');
+    halo.addColorStop(at(0.93),  rgba([170, 90, 16], 0.05));
+    halo.addColorStop(at(0.990), rgba([192,152, 24], 0.13));
+    halo.addColorStop(at(1.030), rgba([ 67,117,191], 0.08));
+    halo.addColorStop(at(1.10),  rgba([120, 54,167], 0.05));
+    halo.addColorStop(1, 'rgba(0,0,0,0)');
+    g.fillStyle = halo;
+    g.beginPath();
+    g.arc(cx, cy, r1, 0, 6.2832);
+    g.moveTo(cx + r0, cy);
+    g.arc(cx, cy, r0, 0, 6.2832, true);
+    g.fill();
+
+    // 2. each ring with a soft bloom around it, then its sharp core on top
+    for (var k = 0; k < RINGS.length; k++) {
+      var R = RINGS[k], r = thetaE * R[0];
+      g.save();
+      g.shadowColor = rgba(R[1], R[4]);
+      g.shadowBlur = thetaE * GLOW * DPR;       // shadowBlur ignores the transform, so scale by hand
+      g.strokeStyle = rgba(R[1], R[2] * 0.25);
+      g.lineWidth = R[3] * 1.4;
+      g.beginPath(); g.arc(cx, cy, r, 0, 6.2832); g.stroke();
+      g.restore();
+
+      // the ring itself: a band with a Gaussian profile across it instead of a hard-edged stroke,
+      // so each colour fades into its neighbours
+      var sig = R[3] * FUZZ * 0.5, half = sig * 3;
+      var band = g.createRadialGradient(cx, cy, r - half, cx, cy, r + half);
+      for (var q = 0; q <= 12; q++) {
+        var x = (q / 12) * 2 - 1;                     // −1 … 1 across the band
+        band.addColorStop(q / 12, rgba(R[1], R[2] * Math.exp(-4.5 * x * x)));
+      }
+      g.globalCompositeOperation = 'source-over';   // bands overlap without washing out to white
+      g.fillStyle = band;
+      g.beginPath();
+      g.arc(cx, cy, r + half, 0, 6.2832);
+      g.moveTo(cx + Math.max(0, r - half), cy);
+      g.arc(cx, cy, Math.max(0, r - half), 0, 6.2832, true);
+      g.fill();
+      g.globalCompositeOperation = 'lighter';
+    }
+
+    // 3. inner rim, brightest line in the render, with its own faint glow
+    g.save();
+    g.shadowColor = 'rgba(214,200,255,0.55)';
+    g.shadowBlur = thetaE * 0.035 * DPR;
+    g.strokeStyle = 'rgba(244,236,255,0.60)';
+    g.lineWidth = 2;
+    g.beginPath(); g.arc(cx, cy, thetaE * 0.47, 0, 6.2832); g.stroke();
+    g.restore();
+  }
+
+  function drawStar(px, py, radius, tint, alpha) {
+    if (px < -12 || px > W + 12 || py < -12 || py > H + 12) return;
+    if (alpha <= 0.012) return;
+    ctx.beginPath();
+    ctx.arc(px, py, radius, 0, 6.2832);
+    ctx.fillStyle = 'rgba(' + tint[0] + ',' + tint[1] + ',' + tint[2] + ',' + alpha + ')';
+    ctx.fill();
+  }
+
+  function frame(ts) {
+    if (!t0) t0 = ts;
+    var t = (ts - t0) / 1000;
+
+    ctx.fillStyle = '#06060B';
+    ctx.fillRect(0, 0, W, H);
+
+    // slow drift of the whole source plane, plus a very slow roll
+    var driftX = Math.sin(t * 0.017) * 0.55 + t * 0.0085;
+    var driftY = Math.cos(t * 0.013) * 0.16;
+    var roll = t * 0.0125;
+    var cosR = Math.cos(roll), sinR = Math.sin(roll);
+
+    for (var i = 0; i < stars.length; i++) {
+      var s = stars[i];
+
+      var ax = s.sx + driftX, ay = s.sy + driftY;
+      // wrap the source plane so the field never empties
+      ax = ((ax + 2.2) % 4.4 + 4.4) % 4.4 - 2.2;
+
+      var bx = ax * cosR - ay * sinR;
+      var by = ax * sinR + ay * cosR;
+
+      var u = Math.sqrt(bx * bx + by * by);
+      if (u < 1e-4) u = 1e-4;
+      var ux = bx / u, uy = by / u;
+
+      var root = Math.sqrt(u * u + 4);
+      var yPlus = 0.5 * (u + root);
+      var yMinus = 0.5 * (u - root);          // negative: opposite side
+      var mu = (u * u + 2) / (u * root);
+      var muP = 0.5 * (mu + 1);
+      var muM = 0.5 * (mu - 1);
+
+      var tw = 0.86 + 0.14 * Math.sin(t * 1.5 + s.tw);
+
+      // primary image
+      var pR = Math.min(3.4, s.m * Math.pow(Math.min(muP, 26), 0.32));
+      var pA = Math.min(1, 0.52 * s.m * Math.pow(Math.min(muP, 26), 0.40)) * tw;
+      drawStar(cx + ux * yPlus * thetaE, cy + uy * yPlus * thetaE, pR, s.tint, pA);
+
+      // secondary image, inside the ring — hidden by the shadow when close in
+      var rM = Math.abs(yMinus) * thetaE;
+      if (rM > thetaE * 0.47 && muM > 0.02) {
+        var sR = Math.min(2.6, s.m * Math.pow(Math.min(muM, 26), 0.32) * 0.85);
+        var sA = Math.min(0.9, 0.42 * s.m * Math.pow(Math.min(muM, 26), 0.40)) * tw;
+        drawStar(cx + ux * yMinus * thetaE, cy + uy * yMinus * thetaE, sR, s.tint, sA);
+      }
+    }
+
+    // the shadow
+    ctx.beginPath();
+    ctx.arc(cx, cy, thetaE * 0.47, 0, 6.2832);
+    ctx.fillStyle = '#06060B';
+    ctx.fill();
+
+    // chromatic rings with their glow (see buildRings), breathing very slowly
+    ctx.save();
+    ctx.globalAlpha = 0.90 + 0.10 * Math.sin(t * 0.45);   // set to 1 for a steady ring
+    ctx.drawImage(ringLayer, 0, 0, W, H);
+    ctx.restore();
+
+    if (running) raf = requestAnimationFrame(frame);
+  }
+
+  function start() {
+    if (running) return;
+    running = true;
+    t0 = 0;
+    raf = requestAnimationFrame(frame);
+  }
+  function stop() {
+    running = false;
+    if (raf) cancelAnimationFrame(raf);
+  }
+
+  resize();
+
+  if (reduced) {
+    running = false;
+    frame(0);                                   // one static frame
+  } else {
+    start();
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        es[0].isIntersecting ? start() : stop();
+      }, { threshold: 0 }).observe(cv);
+    }
+    document.addEventListener('visibilitychange', function () {
+      document.hidden ? stop() : start();
+    });
+  }
+
+  var rt;
+  window.addEventListener('resize', function () {
+    clearTimeout(rt);
+    rt = setTimeout(function () {
+      resize();
+      if (reduced) frame(0);
+    }, 180);
+  });
+})();
+</script>
+
+</body>
+</html>
