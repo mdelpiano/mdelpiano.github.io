@@ -128,7 +128,8 @@ a:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; border-ra
 }
 
 .portrait, .portrait-fallback {
-  width: auto;
+  width: var(--photo-w);
+  max-width: 100%;
   height: auto;                 /* keep the photo's own aspect ratio, no cropping */
   border-radius: 1px;
   display: block;
@@ -314,12 +315,36 @@ footer a { color: var(--ink-2); }
 /* ---------- narrow ---------- */
 
 @media (max-width: 40rem) {
+  :root { --photo-w: 6.5rem; }
+  body { font-size: 16px; }
   .wrap { padding-inline: 1.1rem; }
-  .nav-inner { padding-inline: 1.1rem; }
-  .hero { min-height: 22rem; }
-  .hero-inner { grid-template-columns: 1fr; gap: 1.2rem; padding: 2.4rem 1.1rem 1.8rem; }
-  :root { --photo-w: 7rem; }
+  .hero { min-height: 0; }
+  /* photo beside the name, as a small portrait, instead of a full-width block */
+  .hero-inner {
+    grid-template-columns: var(--photo-w) 1fr;
+    gap: .5rem 1rem;
+    padding: 9.5rem 1.1rem 1.6rem;          /* room above for the black hole */
+    align-items: end;
+  }
+  .hero-inner > div:last-child { display: contents; }
+  h1 { grid-column: 2; align-self: end; font-size: 1.9rem; margin: 0; }
+  .pronounce, .role, .links { grid-column: 1 / -1; }
+  .pronounce { margin: .2rem 0 .4rem; }
+  .portrait-slot, .hero-inner > div:first-child { grid-row: 1; }
+  /* tabs: one row, swipe sideways if they do not fit; bigger tap targets */
+  .nav-inner {
+    padding: 0 1.1rem;
+    flex-wrap: nowrap; overflow-x: auto; gap: .8rem;
+    font-size: .72rem; letter-spacing: .02em;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  nav.jump a { padding: .75rem 0 .6rem; white-space: nowrap; }
+  section { padding-top: 2.4rem; }
+  h2 { font-size: 1.3rem; }
   .entries li { grid-template-columns: 1fr; gap: .1rem; }
+  .fig-spectrum { justify-content: center; }
+  figcaption { max-width: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -357,6 +382,7 @@ footer a { color: var(--ink-2); }
 <!-- ============ NAV ============ -->
 <nav class="jump" aria-label="Sections">
   <div class="nav-inner" role="tablist">
+    <a href="#about" role="tab" aria-controls="about">about</a>
     <a href="#research" role="tab" aria-controls="research">research</a>
     <a href="#publications" role="tab" aria-controls="publications">publications</a>
     <a href="#talks" role="tab" aria-controls="talks">talks</a>
@@ -367,9 +393,25 @@ footer a { color: var(--ink-2); }
 
 <div class="wrap">
 
-  <!-- ============ RESEARCH (default tab) ============ -->
+  <!-- ============ ABOUT (default tab) ============ -->
+  <section id="about" role="tabpanel">
+    <p class="label">About</p>
+    <h2>Hello, I am Manuel</h2>
+
+    <p class="lede">I am a theoretical physicist, currently a postdoctoral researcher at the Quantum Field Theory Center of the University of Southern Denmark in Odense, where I work with Francesco Sannino.</p>
+
+    <p>Most of my work is about black holes: what their geometry looks like once we stop assuming that general relativity is the last word, and how any difference would show up in things we can actually measure, such as black hole shadows and the gravitational waves of a ringdown. I also work on quantum field theory, most recently on semiclassical methods for gauge theories. The longer story is under <a href="#research">research</a>.</p>
+
+    <p>I grew up in Naples and studied there all the way, from the Nunziatella military school to a PhD at the Scuola Superiore Meridionale, before moving to Denmark in 2025. I am a member of the LISA Consortium and of the COST Action BridgeQG, and at SDU I am a teaching assistant for Quantum Mechanics II.</p>
+
+    <p>Away from the blackboard I cook, mostly pizza, pasta al forno and desserts, and I walk balls in the ballroom scene. More of that under <a href="#elsewhere">elsewhere</a>.</p>
+
+    <p>If you want to talk physics, or you are a student looking for a project, write to me at <a href="mailto:madelp@qtc.sdu.dk">madelp@qtc.sdu.dk</a>.</p>
+  </section>
+
+  <!-- ============ RESEARCH ============ -->
   <section id="research" role="tabpanel">
-    <p class="label" style="margin-top:2.6rem">Black holes</p>
+    <p class="label">Black holes</p>
 
     <p class="lede">Black holes are where gravity is at its most extreme. The event horizon is a one-way membrane, and whatever happens inside it is hidden from us. The region around it is not: light and gravitational waves cross it on their way to our telescopes and detectors, and carry an imprint of the geometry there.</p>
     <p class="lede">Almost everything we say about an astrophysical black hole begins by assuming it is the Kerr solution of vacuum general relativity. We assume it because it is the solution we know how to compute with, not because it has been tested where it would matter most, in the strong field just outside the horizon.</p>
@@ -419,14 +461,14 @@ footer a { color: var(--ink-2); }
     <p>More recently I have been moving the programme out of the static case. With Marco de Cesare and Carlos Herdeiro I solved the Einstein equations to quadratic order for the backreaction of a decaying massive scalar cloud on a Schwarzschild black hole, keeping the exponential decay of the state rather than treating the cloud as stationary, so that the horizon evolves under the field equations rather than by assumption.</p>
 
     <p>The next questions I want to answer are whether the near-horizon consistency conditions have anything to say about the <em>stability</em> of the quasi-normal spectrum, and what all of this looks like once the geometry is allowed to rotate.</p>
-    
+
     <p class="label" style="margin-top:2.6rem">Quantum field theory</p>
     <h2>Beyond black holes</h2>
 
     <p>Not everything I work on has a horizon in it. With Borut Bajc and Francesco Sannino I studied a grand unified theory that stays finite in the ultraviolet once supersymmetry is broken, asking how far the good high-energy behaviour of a supersymmetric theory can survive the breaking that any realistic model needs.</p>
 
-    <p>More recently I have been working on semiclassical methods for strongly coupled gauge theories. The idea is that the scaling dimension of an operator built from many fields, such as a high power of the Yang–Mills field strength, can be computed from a classical solution on the cylinder ℝ × S³ and its quantisation, in a regime where ordinary perturbation theory is of little use. Extending this approach to pure Yang–Mills is work in progress, and it is a useful change of perspective: the same questions of consistency and control that matter near a horizon turn up here in a very different form.</p>  
-</section>
+    <p>More recently I have been working on semiclassical methods for strongly coupled gauge theories. The idea is that the scaling dimension of an operator built from many fields, such as a high power of the Yang–Mills field strength, can be computed from a classical solution on the cylinder ℝ × S³ and its quantisation, in a regime where ordinary perturbation theory is of little use. Extending this approach to pure Yang–Mills is work in progress, and it is a useful change of perspective: the same questions of consistency and control that matter near a horizon turn up here in a very different form.</p>
+  </section>
 
   <!-- ============ PUBLICATIONS ============ -->
   <section id="publications" role="tabpanel">
@@ -560,7 +602,8 @@ footer a { color: var(--ink-2); }
       </figcaption>
     </figure>
 
-    <div class="fact">
+    <div class="facts" style="margin-top:2rem">
+      <div class="fact">
         <h3>Kitchen</h3>
         <p>My Neapolitan origins do not lie: I make a very good pizza, a proper pasta al forno, and more desserts than is reasonable. You can ask my friends' feedback on my cooking! ;-P</p>
       </div>
@@ -569,6 +612,7 @@ footer a { color: var(--ink-2); }
         <h3>Ballroom</h3>
         <p>I am part of the ballroom community and walk balls in Old Way and Executive Realness. Old Way is vogue at its most geometric, all lines, symmetry and precision, which may not be a coincidence. Ballroom was built by Black and Latinx LGBTQ+ communities in New York, and I am grateful to be welcomed into it.</p>
       </div>
+    </div>
   </section>
 
   <!-- ============ CV ============ -->
@@ -603,7 +647,7 @@ footer a { color: var(--ink-2); }
 <script>
 /* ============================================================
    Tabs. The nav shows one section at a time, chosen by the URL
-   hash (#research, #publications, #talks, #cv, #elsewhere), so
+   hash (#about, #research, #publications, #talks, #cv, #elsewhere), so
    each tab has its own link and the back button works.
    Without JavaScript every section is simply shown in sequence.
    ============================================================ */
@@ -696,9 +740,11 @@ footer a { color: var(--ink-2); }
     cv.height = Math.round(H * DPR);
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     // keep the lens clear of the name: right of centre on wide screens
-    cx = W * (W > 680 ? 0.72 : 0.60);
-    cy = H * 0.37;
-    thetaE = Math.min(W, H) * 0.30;
+    if (W > 680) {
+      cx = W * 0.72; cy = H * 0.37; thetaE = Math.min(W, H) * 0.30;
+    } else {                                   // phones: upper right, above the name
+      cx = W * 0.68; cy = Math.min(H * 0.30, 110); thetaE = Math.min(W * 0.24, 95);
+    }
     seedStars();
     buildRings();
   }
